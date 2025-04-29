@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - Waiter Robot Project</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== EXACT NAVIGATION BAR FROM 5000+ LINE VERSION ===== */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    }
+
+    body {
+    background: linear-gradient(135deg, #0a0a0a, #001122);
+    color: #e0e0e0;
+    line-height: 1.6;
+    overflow-x: hidden;
+    animation: backgroundFade 10s infinite alternate;
+    transition: background-color 0.3s ease;
+    min-height: 100vh;
+    }
+
+    @keyframes backgroundFade {
+    0% { background: linear-gradient(135deg, #0a0a0a, #001122); }
+    100% { background: linear-gradient(135deg, #001122, #0a0a0a); }
+    }
+
+    nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: #002244;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    z-index: 1000;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.8);
+    transform: translateX(-100%);
+    transition: transform 1s ease;
+    overflow-y: auto;
+    }
+
+    nav.active {
+    transform: translateX(0);
+    }
+
+    nav div.logo {
+    font-size: 2rem;
+    color: #00bfff;
+    font-weight: bold;
+    text-shadow: 0 0 15px #00bfff, 0 0 30px #00bfff;
+    animation: glowLogo 3s infinite alternate;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #00bfff;
+    width: 100%;
+    text-align: center;
+    }
+
+    @keyframes glowLogo {
+    0% { text-shadow: 0 0 10px #00bfff; }
+    100% { text-shadow: 0 0 20px #00ffff; }
+    }
+
+    nav .nav-links {
+    width: 100%;
+    flex-grow: 1;
+    }
+
+    nav a {
+    color: #00bfff;
+    margin: 1rem 0;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    transition: all 0.4s ease;
+    width: 100%;
+    text-align: left;
+    display: block;
+    font-size: 1.1rem;
+    }
+
+    .logo-img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    animation: glowLogo 3s infinite alternate;
+    filter: drop-shadow(0 0 10px #00bfff);
+    }
+
+    nav a i {
+    margin-right: 10px;
+    width: 25px;
+    text-align: center;
+    }
+
+    nav a:hover {
+    background: #00bfff;
+    color: #002244;
+    text-shadow: 0 0 10px #002244;
+    box-shadow: 0 0 15px #00bfff;
+    transform: translateX(10px);
+    }
+
+    nav a.active {
+    background: rgba(0, 191, 255, 0.2);
+    border-left: 4px solid #00bfff;
+    }
+
+    nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00bfff;
+    transition: width 1s ease;
+    }
+
+    nav a:hover::after {
+    width: 100%;
+    }
+
+    .social-links {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    padding: 1rem 0;
+    }
+
+    .social-links a {
+    color: #00bfff;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: all 1s ease;
+    }
+
+    .social-links a:hover {
+    color: #00ffff;
+    transform: translateY(-5px);
+    text-shadow: 0 0 15px #00ffff;
+    }
+
+    /* Main Content */
+    .main-content {
+    margin-left: 0;
+    transition: margin-left 1s ease;
+    min-height: 100vh;
+    }
+
+    .main-content.shifted {
+    margin-left: 280px;
+    }
+
+    /* About Me Content */
+    section {
+    padding: 6rem 2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    }
+
+    section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #00bfff;
+    position: relative;
+    display: inline-block;
+    }
+
+    section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #00bfff;
+    border-radius: 3px;
+    }
+
+    section p {
+    font-size: 1.1rem;
+    margin: 1.5rem auto;
+    color: #ccc;
+    line-height: 1.8;
+    }
+
+    /* Particles */
+    #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    }
+
+    /* Nav Toggle */
+    .nav-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #00bfff;
+    color: #002244;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+    transition: all 1s ease;
+    }
+
+    .nav-toggle:hover {
+    background: #00ffff;
+    transform: scale(1.15);
+    }
+
+    /* ===== NEW FOOTER STYLES ===== */
+    footer {
+    background: #002244;
+    color: #aaa;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0, 191, 255, 0.2);
+    }
+
+    .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    }
+
+    .footer-links a {
+    color: #00bfff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .copyright {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #777;
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(0, 34, 68, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
+    }
+
+    .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    }
+
+    .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #00bfff;
+    }
+
+    .form-group input,
+    .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    }
+
+    .form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+    }
+
+    .submit-btn {
+    background: #00bfff;
+    color: #002244;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+    background: #00ffff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 191, 255, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .main-content.shifted {
+        margin-left: 0;
+      }
+
+      nav {
+        width: 100%;
+        transform: translateX(-100%);
+      }
+
+      nav.active {
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 4rem 1rem;
+      }
+      
+      section h2 {
+        font-size: 2rem;
+      }
+
+      .contact-form {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <nav>
+    <div class="logo">
+        <img src="mylogo (2).png" alt="Logo" class="logo-img">
+      </div>
+    <div class="nav-links">
+      <a href="#about-me" class="active"><i class="fas fa-user"></i> About me</a>
+      <a href="#skills"><i class="fas fa-robot"></i> My skills</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+    <div class="social-links">
+      <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </nav>
+  <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+
+  <div class="main-content">
+    <section id="about-me" class="visible">
+      <h2>About Me</h2>
+      <p>I'm the creator behind the Waiter Robot project, passionate about robotics and IoT technology.</p>
+      <p>With a background in engineering and programming, I've dedicated myself to building innovative solutions that bridge the gap between hardware and software.</p>
+      <p>This project represents my journey into creating functional robots that can assist in real-world scenarios.</p>
+    </section>
+    
+    <section id="skills" class="visible">
+      <h2>My Skills</h2>
+      <p>✔️ Robotics Programming<br>
+         ✔️ IoT Sensor Integration<br>
+         ✔️ Mechanical Design<br>
+         ✔️ Problem Solving<br>
+         ✔️ Continuous Learning</p>
+    </section>
+    
+    <section id="contact" class="visible">
+      <h2>Contact Me</h2>
+      <p>If you have something to ask just ask here.</p>
+      
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" placeholder="Type type type haha!!!"></textarea>
+        </div>
+        <button class="submit-btn">Send Message</button>
+      </form>
+      
+      <p>Or email me directly at: <a href="mailto:batbayaryura0@gmail.com" style="color:#00bfff;">batbayaryura0@gmail.com</a></p>
+    </section>
+    
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#about-me">About Me</a>
+          <a href="#skills">My Skills</a>
+          <a href="#contact">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="social-links">
+          <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <div class="copyright">
+          &copy; 2025 Waiter Robot Project About me T. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 35 },
+          size: {value: 2},
+          move: {speed: 2},
+          color: { value: '#ccc' },
+          line_linked: { enable: true, distance: 220, color: '#ccc' }
+        }
+      });
+    });
+
+    function toggleNav() {
+      document.querySelector('nav').classList.toggle('active');
+      document.querySelector('.main-content').classList.toggle('shifted');
+    }
+
+    window.addEventListener('scroll', function() {
+      document.querySelectorAll('section').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 992) {
+          toggleNav();
+        }
+      });
+    });
+    
+    document.addEventListener('keydown', function(e) { // 
+      if (e.key === 'Escape') {
+        const nav = document.querySelector('nav');
+        const main = document.querySelector('.main-content');
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          main.classList.remove('shifted');
+        }
+      }
+    });
+    
+    const contactForm = document.querySelector('.contact-form'); // Source https://www.javascript-kurs.de
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        this.reset();
+      });
+    }
+  </script>
+</body>
+</html>
